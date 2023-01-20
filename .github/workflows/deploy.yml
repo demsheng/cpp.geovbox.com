@@ -32,7 +32,7 @@ jobs:
         run: make build
 
       - name: Deploy the website
-        uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305
+        uses: peaceiris/actions-gh-pages@bd8c6b06eba6b3d25d72b7a1767993c0aeee42e7
         with:
           # personal token is needed here because it's pushing to an external repository.
           # personal token can be generated at https://github.com/settings/tokens,
