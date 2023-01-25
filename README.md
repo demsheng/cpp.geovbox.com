@@ -15,3 +15,14 @@
 - 主题
 
 ref: https://github.com/alex-shpak/hugo-book
+
+# gh-pages 部署失败解决办法
+
+https://github.com/demsheng/cpp.geovbox.com/settings/actions
+
+Workflow permissions 默认 没有write权限，选择read and write permissions给予写入权限
+
+## gh-pages 设置
+
+https://github.com/demsheng/cpp.geovbox.com/settings/pages
+
