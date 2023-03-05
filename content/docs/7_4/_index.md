@@ -1,5 +1,5 @@
 ---
-weight: 7
+weight: 74
 bookFlatSection: true
 title: "7.4 private本类可访问"
 ---
