@@ -33,7 +33,7 @@ jobs:
         run: make all
 
       - name: Deploy for preview
-        uses: peaceiris/actions-gh-pages@068dc23d9710f1ba62e86896f84735d869951305
+        uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847
         with:
           # personal token can be generated at https://github.com/settings/tokens,
           # and added to https://github.com/organizations/demsheng/settings/secrets/actions
