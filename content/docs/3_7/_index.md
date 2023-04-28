@@ -1,5 +1,5 @@
 ---
-weight: 5
+weight: 37
 bookFlatSection: true
 title: "3.7 单一定义规则：auto"
 ---
