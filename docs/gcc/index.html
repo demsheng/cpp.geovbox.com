@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="generator" content="Hugo 0.68.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="g&#43;&#43;编译过程 生成一个可执行文件。包括两部分：编译阶段，链接阶段。
+ 编译阶段包括三个步骤。预处理，编译，汇编 &mdash;-&gt; 生成obj文件； 链接阶段对obj文件的合并，生成exe可执行文件。  g&#43;&#43;在对源程序执行编译工作时，需要经过以下四个步骤：(其中 -o 可以理解为将生成的文件重命名的作用）
+  预处理：对源程序中的宏定义、包含头文件等进行处理，生成后缀名为.i的文件（使用）
+g&#43;&#43; -E hello.cpp -o hello.i hello.cpp是需要编译的源文件，-o 选项指定输出的文件名。这里使用-E选项编译生成hello.i 文件
+  转化为汇编文件：使用-S 选项，可以将预处理之后的.i文件转换为目标机器的汇编代码.S文件
+g&#43;&#43; -S hello.i -o hello.s 使用该参数可以将.i 文件编译生成.s 文件，输出文件名同样使用-o 选项指定。
+  汇编文件-&gt;目标文件，即转换为机器代码：使用-c选项
+g&#43;&#43; -c hello.s -o hello.o   链接：将上一步产生的目标文件链接为可执行文件，使用-o参数
+静态链接 ld -e main hello.o -o hello.exe 为入口函数，.o文件为需要链接的obj文件。 这一行命令会弹出很多错误信息，因为你没有给出完整的依赖库，实际链接过程较为复杂，这里不做要求，仅了解g&#43;&#43;编译链接过程即可，刚兴趣的同学自行搜索相关资料。
+以上过程是g&#43;&#43;工具编译cpp源程序的具体过程，在实际使用时我们可以不用按照流程一步步编译，可以一步到位将源程序编译为可执行文件，只需要使用如下命令：
+g&#43;&#43; hello.cpp -o hello.exe  -o：指定生成可执行文件的名称。使用方法为：g&#43;&#43; -o afile file.cpp file.h … （可执行文件不可与待编译或链接文件同名，否则会生成相应可执行文件且覆盖原编译或链接文件），如果不使用-o选项，则会生成默认可执行文件a.out。 -c：只编译不链接，只生成目标文件。 -g：添加gdb调试选项。    参考：">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="g&#43;&#43;编译过程" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cpp.geovbox.com/docs/gcc/" />
+
+<title>g&#43;&#43;编译过程 | 面向对象程序设计</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6c7c6446dfdee7c8c933e9bbc6e80ee3ed6c913b2a59519f2092c3c6a9d63e55.css" integrity="sha256-bHxkRt/e58jJM&#43;m7xugO4&#43;1skTsqWVGfIJLDxqnWPlU=">
+<script defer src="/en.search.min.367f1f5df2279502813f1e5f1a057adba4aa9ca4c1eafecf11162d6f4eaac5f2.js" integrity="sha256-Nn8fXfInlQKBPx5fGgV626SqnKTB6v7PERYtb06qxfI="></script>
+<link rel="alternate" type="application/rss+xml" href="https://cpp.geovbox.com/docs/gcc/index.xml" title="面向对象程序设计" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>面向对象程序设计</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/config/" class="">C&#43;&#43;编译器环境配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/edit_cpp/" class="">C&#43;&#43;编辑器配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/gcc/" class=" active">g&#43;&#43;编译过程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/make/" class="">make入门教程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/2_8/" class="">2.8包含警戒：多次声明</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/3_7/" class="">3.7 单一定义规则：auto</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/7_4/" class="">7.4 private本类可访问</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        作业
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>g&#43;&#43;编译过程</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#g编译过程">g++编译过程</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="g编译过程">g++编译过程</h2>
+<p><img src="gcclink1.png" alt="avatar" />
+<img src="gcclink.png" alt="avatar" /></p>
+<p>生成一个可执行文件。包括两部分：编译阶段，链接阶段。</p>
+<ul>
+<li>编译阶段包括三个步骤。预处理，编译，汇编 &mdash;-&gt; 生成obj文件；</li>
+<li>链接阶段对obj文件的合并，生成exe可执行文件。</li>
+</ul>
+<p>g++在对源程序执行编译工作时，需要经过以下四个步骤：(其中 <code>-o</code> 可以理解为将生成的文件重命名的作用）</p>
+<ol>
+<li>
+<p>预处理：对源程序中的宏定义、包含头文件等进行处理，生成后缀名为.i的文件（使用）</p>
+<pre><code>g++ -E hello.cpp -o hello.i
+</code></pre><p>hello.cpp是需要编译的源文件，-o 选项指定输出的文件名。这里使用-E选项编译生成hello.i 文件</p>
+</li>
+<li>
+<p>转化为汇编文件：使用-S 选项，可以将预处理之后的.i文件转换为目标机器的汇编代码.S文件</p>
+<pre><code>g++ -S hello.i -o hello.s
+</code></pre><p>使用该参数可以将.i 文件编译生成.s 文件，输出文件名同样使用-o 选项指定。</p>
+</li>
+<li>
+<p>汇编文件-&gt;目标文件，即转换为机器代码：使用-c选项</p>
+<pre><code>g++ -c hello.s -o hello.o
+</code></pre></li>
+<li>
+<p>链接：将上一步产生的目标文件链接为可执行文件，使用-o参数</p>
+<p>静态链接 <code>ld -e main hello.o -o hello.exe</code> 为入口函数，.o文件为需要链接的obj文件。 <em>这一行命令会弹出很多错误信息，因为你没有给出完整的依赖库，实际链接过程较为复杂，这里不做要求，仅了解g++编译链接过程即可，刚兴趣的同学自行搜索相关资料。</em></p>
+<p><strong>以上过程是g++工具编译cpp源程序的具体过程，在实际使用时我们可以不用按照流程一步步编译，可以一步到位将源程序编译为可执行文件，只需要使用如下命令：</strong></p>
+<pre><code>g++ hello.cpp -o hello.exe
+</code></pre><ul>
+<li>-o：指定生成可执行文件的名称。使用方法为：g++ -o afile file.cpp file.h … （可执行文件不可与待编译或链接文件同名，否则会生成相应可执行文件且覆盖原编译或链接文件），如果不使用-o选项，则会生成默认可执行文件a.out。</li>
+<li>-c：只编译不链接，只生成目标文件。</li>
+<li>-g：添加gdb调试选项。</li>
+</ul>
+</li>
+</ol>
+<blockquote class="book-hint warning">
+  参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/i_love_kbb/article/details/126196876">https://blog.csdn.net/i_love_kbb/article/details/126196876</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/504742628">https://zhuanlan.zhihu.com/p/504742628</a></li>
+<li><a href="https://blog.csdn.net/weixin_43953700/article/details/124890088">https://blog.csdn.net/weixin_43953700/article/details/124890088</a></li>
+</ul>
+</blockquote>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#g编译过程">g++编译过程</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

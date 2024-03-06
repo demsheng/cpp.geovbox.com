@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="generator" content="Hugo 0.68.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="C&#43;&#43;环境配置(Windows系统) 下载安装MinGW-w64详细步骤（c/c&#43;&#43;的编译器gcc的windows版）
+MinGW 的全称是：Minimalist GNU on Windows ，实际上是将gcc（c/c&#43;&#43;编译器）移植到了 Windows 平台下，并且包含了 Win32API ，因此可以将源代码编译为可在 Windows 中运行的可执行程序。而且还可以使用一些 Windows 不具备的，Linux平台下的开发工具。
+选择它的原因：
+ MinGW-w64 是开源软件，可以免费使用。 MinGW-w64 由一个活跃的开源社区在持续维护，不会过时。 MinGW-w64 支持最新的 C语言 标准。 使用 Windows 的C语言运行库，因此编译出的程序不需要第三方 DLL ，可以直接在 Windows 下运行。 总之就是要在windows运行c/c&#43;&#43;按就对了。可以理解为c/c&#43;&#43;的编译器gcc的windows版。  I. 安装 MinGW   下载 MinGW 64 位安装包：x86_64-win32-seh
+或者去百度网盘下载 x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z
+ 链接： https://pan.baidu.com/s/1rdpGMcRD6ovNzDCUycXu7Q?pwd=zdem 提取码：zdem    解压 x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z ， 可以在bin文件夹中找到 g&#43;&#43;.exe 编译器
+  右键-我的电脑-属性-高级系统设置-环境变量-找到PATH环境变量，将g&#43;&#43;.exe所在目录 G:\bin\x86_64-8.1.0-release-win32-seh-rt_v6-rev0\mingw64\bin 写入 PATH 环境变量
+  测试 g&#43;&#43;">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="C&#43;&#43;编译器环境配置" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cpp.geovbox.com/docs/config/" />
+
+<title>C&#43;&#43;编译器环境配置 | 面向对象程序设计</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6c7c6446dfdee7c8c933e9bbc6e80ee3ed6c913b2a59519f2092c3c6a9d63e55.css" integrity="sha256-bHxkRt/e58jJM&#43;m7xugO4&#43;1skTsqWVGfIJLDxqnWPlU=">
+<script defer src="/en.search.min.367f1f5df2279502813f1e5f1a057adba4aa9ca4c1eafecf11162d6f4eaac5f2.js" integrity="sha256-Nn8fXfInlQKBPx5fGgV626SqnKTB6v7PERYtb06qxfI="></script>
+<link rel="alternate" type="application/rss+xml" href="https://cpp.geovbox.com/docs/config/index.xml" title="面向对象程序设计" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>面向对象程序设计</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/config/" class=" active">C&#43;&#43;编译器环境配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/edit_cpp/" class="">C&#43;&#43;编辑器配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/gcc/" class="">g&#43;&#43;编译过程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/make/" class="">make入门教程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/2_8/" class="">2.8包含警戒：多次声明</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/3_7/" class="">3.7 单一定义规则：auto</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/7_4/" class="">7.4 private本类可访问</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        作业
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>C&#43;&#43;编译器环境配置</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#i-安装-mingw">I. 安装 MinGW</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="c环境配置windows系统">C++环境配置(Windows系统)</h1>
+<p>下载安装MinGW-w64详细步骤（c/c++的编译器gcc的windows版）</p>
+<p>MinGW 的全称是：Minimalist GNU on Windows ，实际上是将gcc（c/c++编译器）移植到了 Windows 平台下，并且包含了 Win32API ，因此可以将源代码编译为可在 Windows 中运行的可执行程序。而且还可以使用一些 Windows 不具备的，Linux平台下的开发工具。</p>
+<p>选择它的原因：</p>
+<ol>
+<li>MinGW-w64 是开源软件，可以免费使用。</li>
+<li>MinGW-w64 由一个活跃的开源社区在持续维护，不会过时。</li>
+<li>MinGW-w64 支持最新的 C语言 标准。
+使用 Windows 的C语言运行库，因此编译出的程序不需要第三方 DLL ，可以直接在 Windows 下运行。
+总之就是要在windows运行c/c++按就对了。可以理解为c/c++的编译器gcc的windows版。</li>
+</ol>
+<h2 id="i-安装-mingw">I. 安装 MinGW</h2>
+<ol>
+<li>
+<p>下载 MinGW 64 位安装包：<a href="https://sourceforge.net/projects/mingw-w64/">x86_64-win32-seh</a></p>
+<p>或者去百度网盘下载 x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z</p>
+<ul>
+<li>链接： <a href="https://pan.baidu.com/s/1rdpGMcRD6ovNzDCUycXu7Q?pwd=zdem">https://pan.baidu.com/s/1rdpGMcRD6ovNzDCUycXu7Q?pwd=zdem</a></li>
+<li>提取码：<code>zdem</code></li>
+</ul>
+</li>
+<li>
+<p>解压 <code>x86_64-8.1.0-release-win32-seh-rt_v6-rev0.7z</code> ， 可以在bin文件夹中找到 <code>g++.exe</code> 编译器</p>
+<p><img src="g&#43;&#43;.JPG" alt="avatar" /></p>
+</li>
+<li>
+<p>右键-我的电脑-属性-高级系统设置-环境变量-找到PATH环境变量，将g++.exe所在目录 <code>G:\bin\x86_64-8.1.0-release-win32-seh-rt_v6-rev0\mingw64\bin</code> 写入 <code>PATH</code> 环境变量</p>
+<p><img src="MinGW.png" alt="avatar" /></p>
+</li>
+<li>
+<p>测试 g++</p>
+<p>安装完成后，点击“开始”→“所有程序”→“附件”→“命令提示符”以启动 CMD。
+在 CMD 窗口中敲入 <code>g++ -v</code>，若出现如下内容，则表示 C++ 环境配置成功。</p>
+<pre><code>Microsoft Windows [版本 10.0.19045.2486]
+(c) Microsoft Corporation。保留所有权利。
+
+C:\Users\sheng&gt;g++ -v
+Using built-in specs.
+COLLECT_GCC=g++
+COLLECT_LTO_WRAPPER=G:/bin/x86_64-8.1.0-release-win32-seh-rt_v6-rev0/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/8.1.0/lto-wrapper.exe
+Target: x86_64-w64-mingw32
+Configured with: ../../../src/gcc-8.1.0/configure --host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --prefix=/mingw64 --with-sysroot=/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64 --enable-shared --enable-static --disable-multilib --enable-languages=c,c++,fortran,lto --enable-libstdcxx-time=yes --enable-threads=win32 --enable-libgomp --enable-libatomic --enable-lto --enable-graphite --enable-checking=release --enable-fully-dynamic-string --enable-version-specific-runtime-libs --disable-libstdcxx-pch --disable-libstdcxx-debug --enable-bootstrap --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-gnu-as --with-gnu-ld --with-arch=nocona --with-tune=core2 --with-libiconv --with-system-zlib --with-gmp=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpfr=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-mpc=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-isl=/c/mingw810/prerequisites/x86_64-w64-mingw32-static --with-pkgversion='x86_64-win32-seh-rev0, Built by MinGW-W64 project' --with-bugurl=https://sourceforge.net/projects/mingw-w64 CFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CXXFLAGS='-O2 -pipe -fno-ident -I/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' CPPFLAGS=' -I/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64/opt/include -I/c/mingw810/prerequisites/x86_64-zlib-static/include -I/c/mingw810/prerequisites/x86_64-w64-mingw32-static/include' LDFLAGS='-pipe -fno-ident -L/c/mingw810/x86_64-810-win32-seh-rt_v6-rev0/mingw64/opt/lib -L/c/mingw810/prerequisites/x86_64-zlib-static/lib -L/c/mingw810/prerequisites/x86_64-w64-mingw32-static/lib '
+Thread model: win32
+gcc version 8.1.0 (x86_64-win32-seh-rev0, Built by MinGW-W64 project)
+
+</code></pre></li>
+</ol>
+<blockquote class="book-hint warning">
+  小白用户可以参考以下内容： <a href="https://blog.csdn.net/jjxcsdn/article/details/123058745">https://blog.csdn.net/jjxcsdn/article/details/123058745</a>
+</blockquote>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#i-安装-mingw">I. 安装 MinGW</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

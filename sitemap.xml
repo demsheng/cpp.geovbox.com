@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://cpp.geovbox.com/docs/config/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/docs/edit_cpp/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/docs/gcc/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/docs/make/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/docs/2_8/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/docs/3_7/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/docs/7_4/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/docs/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/posts/</loc>
+  </url>
+  
+  <url>
+    <loc>https://cpp.geovbox.com/</loc>
+  </url>
+  
+</urlset>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="generator" content="Hugo 0.68.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="private本类可访问 自行编译理解以下代码
+//test_private.cpp //知识点：private 本类可访问 //编译：g&#43;&#43; my.cpp #include &lt;iostream&gt; class Course { public : int getDifficulty( ) { return difficulty;} private: int periodCount( ); int course; int difficulty; }; class Student{ public: Student(int sc,int st); void study(Course &amp; course); void help(Student&amp; other); void exercise(){} private : int otherFunc(){ return 1;} private: int score; int strength; }; void Student:: study(Course &amp; course){ score &#43;= 1; strength -= course.getDifficulty(); otherFunc();//OK //int n = course.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="7.4 private本类可访问" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cpp.geovbox.com/docs/7_4/" />
+
+<title>7.4 private本类可访问 | 面向对象程序设计</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6c7c6446dfdee7c8c933e9bbc6e80ee3ed6c913b2a59519f2092c3c6a9d63e55.css" integrity="sha256-bHxkRt/e58jJM&#43;m7xugO4&#43;1skTsqWVGfIJLDxqnWPlU=">
+<script defer src="/en.search.min.367f1f5df2279502813f1e5f1a057adba4aa9ca4c1eafecf11162d6f4eaac5f2.js" integrity="sha256-Nn8fXfInlQKBPx5fGgV626SqnKTB6v7PERYtb06qxfI="></script>
+<link rel="alternate" type="application/rss+xml" href="https://cpp.geovbox.com/docs/7_4/index.xml" title="面向对象程序设计" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>面向对象程序设计</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/config/" class="">C&#43;&#43;编译器环境配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/edit_cpp/" class="">C&#43;&#43;编辑器配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/gcc/" class="">g&#43;&#43;编译过程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/make/" class="">make入门教程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/2_8/" class="">2.8包含警戒：多次声明</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/3_7/" class="">3.7 单一定义规则：auto</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/7_4/" class=" active">7.4 private本类可访问</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        作业
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>7.4 private本类可访问</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#private本类可访问">private本类可访问</a></li>
+    <li><a href="#c类中对同类对象private成员访问">C++类中对同类对象private成员访问</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="private本类可访问">private本类可访问</h2>
+<p>自行编译理解以下代码</p>
+<pre><code>//test_private.cpp
+//知识点：private 本类可访问
+//编译：g++ my.cpp
+#include &lt;iostream&gt;
+class Course {
+public :
+     int getDifficulty( ) { return difficulty;}
+private:
+	int periodCount( );
+	int course;
+	int difficulty;
+};
+
+class Student{
+	public:
+		Student(int sc,int st);
+		void study(Course &amp; course); 
+		void help(Student&amp; other);
+		void exercise(){}
+	private :
+		int otherFunc(){ return 1;}
+	private:
+		int score;
+		int strength;
+};
+
+void Student:: study(Course &amp; course){
+	score += 1; 
+	strength -= course.getDifficulty();
+	otherFunc();//OK
+	//int n = course.periodCount( ); //wrong  Course类不可访问private函数
+}
+
+void Student:: help(Student&amp; other){
+	other.score += 2;  //本类可访问private变量
+	strength -= 2;
+	other.strength -= 4;
+	other.exercise( ); 
+	otherFunc( );//OK
+	other.otherFunc();//OK
+}
+	
+int main()
+{
+
+	return 0;
+} 
+
+</code></pre><h2 id="c类中对同类对象private成员访问">C++类中对同类对象private成员访问</h2>
+<p>私有成员变量的概念，在脑海中的现象是，以private关键字声明，是类的实现部分，不对外公开，不能在对象外部访问对象的私有成员变量．</p>
+<p>　　然而，在实现拷贝构造函数和赋值符函数时，在函数里利用对象直接访问了私有成员变量，因而，产生了困惑．下面以具体实例进行说明：</p>
+<p>　　疑惑：为什么第26行和第32行代码可以编译通过，而第39行和第40行代码会产生编译错误？</p>
+<p><strong>答： 私有是指在类外不能访问,并没说在对象间不能访问。</strong></p>
+<pre><code>class CTest {
+public:
+    CTest(int i); 
+    CTest(const CTest&amp; rhs);
+    CTest&amp; operator=(const CTest&amp; rhs);
+    void printCTest(const CTest&amp; rhs);
+private:
+    int value;
+};
+ 
+CTest::CTest(int i):value(i)
+{
+    cout&lt;&lt;&quot;Contructor of CTest&quot;&lt;&lt;endl;
+}
+ 
+CTest::CTest(const CTest&amp; rhs):value(rhs.value)
+{
+    cout&lt;&lt;&quot;Copy contructor of CTest&quot;&lt;&lt;endl;
+}
+ 
+CTest&amp; CTest::operator=(const CTest&amp; rhs)
+{
+    cout&lt;&lt;&quot;Assign function of CTest&quot;&lt;&lt;endl;
+    if(this == &amp;rhs)
+        return *this;
+    value = rhs.value;                //通过对象访问私有成员变量
+    return *this;
+}
+ 
+void CTest::printCTest(const CTest&amp; rhs)
+{
+    cout&lt;&lt;rhs.value&lt;&lt;endl;        //通过对象访问私有成员变量
+}
+ 
+int main()
+{
+    CTest t = 1;
+    CTest tt = 2;
+    //  cout&lt;&lt;t.value&lt;&lt;endl;        //通过对象访问私有成员变量，编译错误
+    //  cout&lt;&lt;tt.value&lt;&lt;endl;        //通过对象访问私有成员变量，编译错误
+    t.printCTest(tt);
+}
+</code></pre><p>产生这种疑惑的原因是自己对私有成员变量的理解有误，封装是编译期的概念，是针对类型而非对象的，在类的成员函数中可以访问同类型实例对象的私有成员变量．</p>
+<p>具体的解析如下：从变量value的符号是怎么解析的分析．</p>
+<p><strong>1. 确定符号的查找域</strong></p>
+<p>如第26行代码，当编译器发现value变量时，它会在value变量所属的对象rhs的类域中寻找该符号．</p>
+<p><strong>2. 确定当前域中哪些符号可以访问</strong></p>
+<p>由第1步可知，当前查找的域是类域，而printCTest函数在CTest类体中，所以printCTest可以访问CTest类中的所有变量(包括私有成员变量)，因而value符号在CTest类域中被找到．</p>
+<p>如第39行代码，main函数不在CTest类体中，所以main函数不可以访问CTest类域中的私有成员变量．</p>
+<p><strong>3. 符号已查找到，编译通过</strong></p>
+<p>类成员变量的访问权限是编译器强加的，编译器可以找到value，通过编译，自然就可以访问到value变量的值．</p>
+<p><strong>直觉上，我们会以为第26行代码中value符号的查找域应该是对象rhs对应的作用域，然而C++编译器的实现却是在对象rhs的类域查找value符号．</strong></p>
+<ul>
+<li>
+<p>启发：有些直觉是靠不住的，需要深入分析其背后的实现原理，才可以理解透彻．</p>
+</li>
+<li>
+<p><strong>总结：C++的访问修饰符的作用是以类为单位，而不是以对象为单位。</strong></p>
+</li>
+</ul>
+<p>通俗的讲，同类的对象间可以“互相访问”对方的数据成员，只不过访问途径不是直接访问.</p>
+<p>回来查了一下String类的实现才明白，封装性是对类外的操作来说的，在类内操作本类的一个对象时，可以通过该对象访问其私有成员，这种设计也是挺合理的，因为类是自己设计的，当然自己也就知道类的内部结构，所以没有必要对自己也进行类的“封装”。另有一种说法是：“同种类之间是友元关系”。</p>
+<p>步骤是：通过一个对象调用其public成员函数，此成员函数可以访问到自己的或者同类其他对象的public/private/protected数据成员和成员函数(类的所有对象共用)，而且还需要指明是哪个对象的数据成员(调用函数的对象自己的成员不用指明，因为有this指针；其他对象的数据成员可以通过引用或指针间接指明)</p>
+<p>参考：<a href="https://blog.csdn.net/weixin_40539125/article/details/83120249/">C++类中对同类对象private成员访问</a></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#private本类可访问">private本类可访问</a></li>
+    <li><a href="#c类中对同类对象private成员访问">C++类中对同类对象private成员访问</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

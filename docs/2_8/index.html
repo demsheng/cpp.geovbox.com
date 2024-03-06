@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="generator" content="Hugo 0.68.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="为什么写两次 void myFunc(); ，编译器不提示重复定义？ 答：声明可以进行多次，定义只能进行一次。 声明和定义的区别 你或许对这个问题不屑一顾，但仔细想一想这样一个问题：声明和定义的区别到底在哪里？
+区别一  声明告诉编译器，这个变量或函数已经在程序其他地方存在了，所以我正在把这个信息告诉你，下面我要调用的时候请放行。但请不要为我分配任何内存空间，因为已经这个步骤在变量或函数定义的地方进行分配了。 而定义则很清楚了，就是要求分配内存空间。很多时候，声明和定义是合而为一的。  int a; void func() {} 这里同时声明且定义了一个变量和一个函数。
+区别二 这点或许不是每个人都是很清楚的：声明可以进行多次，定义只能进行一次。
+void myfunc(); void myfunc(); void myfunc() {} 可以通过编译，而
+void myfunc(); void myfunc() {} void myfunc() {} 则会报错，因为重复定义了。
+声明和定义的分离 对于函数来说，我们已经很清楚如何对其进行声明和定义的分离了，这正是我们在成对的 .h/.cpp 中做的事情，这里补充一句，实际上编译器对所有函数的声明和定义都悄悄在前面补上了 extern，因为 extern 代表了声明的动作，当我们包含一个头文件的时候，告诉编译器，我接下来调用到的函数是在它处进行定义的。 那么变量的声明和定义如何分离呢？因为我们大多数时候都是既声明又定义一个变量的，如
+int num; 这里虽然没有给num赋任何初值，但是在此处已经完成内存分配了。前面说过，extern关键词是用作声明的，因此我们可以这样做
+extern int num; int num = 100; 当然，没有人在现实生活中会这样做，而且这两行只能放在全局域中，但至少说明了将变量的声明与定义分离也是可以做到的 如果我们这样写
+extern int num = 0; 就是同时声明与定义了，这时这里的extern则是冗余，可写可不写
+ 参考: https://www.jianshu.com/p/92e81ecc8737   ">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="2.8包含警戒：多次声明" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cpp.geovbox.com/docs/2_8/" />
+
+<title>2.8包含警戒：多次声明 | 面向对象程序设计</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6c7c6446dfdee7c8c933e9bbc6e80ee3ed6c913b2a59519f2092c3c6a9d63e55.css" integrity="sha256-bHxkRt/e58jJM&#43;m7xugO4&#43;1skTsqWVGfIJLDxqnWPlU=">
+<script defer src="/en.search.min.367f1f5df2279502813f1e5f1a057adba4aa9ca4c1eafecf11162d6f4eaac5f2.js" integrity="sha256-Nn8fXfInlQKBPx5fGgV626SqnKTB6v7PERYtb06qxfI="></script>
+<link rel="alternate" type="application/rss+xml" href="https://cpp.geovbox.com/docs/2_8/index.xml" title="面向对象程序设计" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>面向对象程序设计</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/config/" class="">C&#43;&#43;编译器环境配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/edit_cpp/" class="">C&#43;&#43;编辑器配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/gcc/" class="">g&#43;&#43;编译过程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/make/" class="">make入门教程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/2_8/" class=" active">2.8包含警戒：多次声明</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/3_7/" class="">3.7 单一定义规则：auto</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/7_4/" class="">7.4 private本类可访问</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        作业
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>2.8包含警戒：多次声明</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么写两次-void-myfunc-编译器不提示重复定义">为什么写两次 <code>void myFunc();</code> ，编译器不提示重复定义？</a></li>
+    <li><a href="#答声明可以进行多次定义只能进行一次">答：声明可以进行多次，定义只能进行一次。</a>
+      <ul>
+        <li><a href="#声明和定义的区别">声明和定义的区别</a></li>
+        <li><a href="#区别一"><strong>区别一</strong></a></li>
+        <li><a href="#区别二"><strong>区别二</strong></a></li>
+        <li><a href="#声明和定义的分离"><strong>声明和定义的分离</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="为什么写两次-void-myfunc-编译器不提示重复定义">为什么写两次 <code>void myFunc();</code> ，编译器不提示重复定义？</h2>
+<h2 id="答声明可以进行多次定义只能进行一次">答：声明可以进行多次，定义只能进行一次。</h2>
+<h3 id="声明和定义的区别">声明和定义的区别</h3>
+<p>你或许对这个问题不屑一顾，但仔细想一想这样一个问题：声明和定义的区别到底在哪里？</p>
+<h3 id="区别一"><strong>区别一</strong></h3>
+<ul>
+<li>声明告诉编译器，<strong>这个变量或函数已经在程序其他地方存在了</strong>，所以我正在把这个信息告诉你，下面我要调用的时候请放行。但请不要为我分配任何内存空间，因为已经这个步骤在变量或函数定义的地方进行分配了。</li>
+<li>而定义则很清楚了，<strong>就是要求分配内存空间</strong>。很多时候，声明和定义是合而为一的。</li>
+</ul>
+<pre><code>int a;
+void func() {}
+</code></pre><p>这里同时声明且定义了一个变量和一个函数。</p>
+<h3 id="区别二"><strong>区别二</strong></h3>
+<p>这点或许不是每个人都是很清楚的：声明可以进行多次，定义只能进行一次。</p>
+<pre><code>void myfunc();
+
+void myfunc();
+
+void myfunc() {}
+</code></pre><p>可以通过编译，而</p>
+<pre><code>void myfunc();
+void myfunc() {}
+void myfunc() {}
+</code></pre><p>则会报错，因为重复定义了。</p>
+<h3 id="声明和定义的分离"><strong>声明和定义的分离</strong></h3>
+<p>对于函数来说，我们已经很清楚如何对其进行声明和定义的分离了，这正是我们在成对的 .h/.cpp 中做的事情，这里补充一句，实际上编译器对所有函数的声明和定义都悄悄在前面补上了 extern，因为 extern 代表了声明的动作，当我们包含一个头文件的时候，告诉编译器，我接下来调用到的函数是在它处进行定义的。
+那么变量的声明和定义如何分离呢？因为我们大多数时候都是既声明又定义一个变量的，如</p>
+<pre><code>int num;
+</code></pre><p>这里虽然没有给num赋任何初值，但是在此处已经完成内存分配了。前面说过，extern关键词是用作声明的，因此我们可以这样做</p>
+<pre><code>extern int num;
+int num = 100;
+</code></pre><p>当然，没有人在现实生活中会这样做，而且这两行只能放在全局域中，但至少说明了将变量的声明与定义分离也是可以做到的
+如果我们这样写</p>
+<pre><code>extern int num = 0;
+</code></pre><p>就是同时声明与定义了，这时这里的extern则是冗余，可写可不写</p>
+<blockquote class="book-hint warning">
+  <ul>
+<li>参考: <a href="https://www.jianshu.com/p/92e81ecc8737">https://www.jianshu.com/p/92e81ecc8737</a></li>
+</ul>
+</blockquote>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么写两次-void-myfunc-编译器不提示重复定义">为什么写两次 <code>void myFunc();</code> ，编译器不提示重复定义？</a></li>
+    <li><a href="#答声明可以进行多次定义只能进行一次">答：声明可以进行多次，定义只能进行一次。</a>
+      <ul>
+        <li><a href="#声明和定义的区别">声明和定义的区别</a></li>
+        <li><a href="#区别一"><strong>区别一</strong></a></li>
+        <li><a href="#区别二"><strong>区别二</strong></a></li>
+        <li><a href="#声明和定义的分离"><strong>声明和定义的分离</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

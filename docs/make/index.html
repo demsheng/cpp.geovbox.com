@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta name="generator" content="Hugo 0.68.0" />
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="make入门教程 (采用 mingw32-make.exe) 上一节，我们已经学习了如何用g&#43;&#43;编译单个.cpp文件。如果有多个 .cpp 文件我们如何来编译我们的程序呢？ Makefile是一种方便的组织代码编译方式。下面我们来创建自己的makefile，编译并链接多个.cpp ，生成可执行程序。
+一个简单的例子 首先举一个简单的例子，在项目文件夹中有三个文件: main.c ，func.c ，func.h ，分别代表着主程序，函数实现和对应的头文件。
+main.c
+// main.c #include &lt;stdio.h&gt; #include &quot;func.h&quot; int main() { sayHello(); return 0; } func.h
+// func.h void sayHello(); func.c
+// func.c #include &lt;stdio.h&gt; #include &quot;func.h&quot; void sayHello() { printf(&quot;Hello makefiles!\n&quot;); } 一般情况下，我们将使用以下命令来编译这个项目：
+g&#43;&#43; -o hello.exe main.c func.c -I.	# 注意最后的点代表当前目录 这条命令编译了两个.c文件 main.c func.c , 并将可执行文件命名为 hello.exe
+ -o 定义生成的可执行文件的名字。 -I.代表gcc将在当前目录（.）寻找包含的头文件.  当只有轻微的改动时适当修改一下这条命令就已经足够了，但当添加更多文件时，这就很麻烦了。
+另外，如果你只改动了其中某一个.c文件，这条命令每次都将重新编译所有文件，对于大项目来说效率很低，所以这才需要makefile.
+1 Makefile hello.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="make入门教程" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://cpp.geovbox.com/docs/make/" />
+
+<title>make入门教程 | 面向对象程序设计</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6c7c6446dfdee7c8c933e9bbc6e80ee3ed6c913b2a59519f2092c3c6a9d63e55.css" integrity="sha256-bHxkRt/e58jJM&#43;m7xugO4&#43;1skTsqWVGfIJLDxqnWPlU=">
+<script defer src="/en.search.min.367f1f5df2279502813f1e5f1a057adba4aa9ca4c1eafecf11162d6f4eaac5f2.js" integrity="sha256-Nn8fXfInlQKBPx5fGgV626SqnKTB6v7PERYtb06qxfI="></script>
+<link rel="alternate" type="application/rss+xml" href="https://cpp.geovbox.com/docs/make/index.xml" title="面向对象程序设计" />
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>面向对象程序设计</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/config/" class="">C&#43;&#43;编译器环境配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/edit_cpp/" class="">C&#43;&#43;编辑器配置</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/gcc/" class="">g&#43;&#43;编译过程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/make/" class=" active">make入门教程</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/2_8/" class="">2.8包含警戒：多次声明</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/3_7/" class="">3.7 单一定义规则：auto</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="https://cpp.geovbox.com/docs/7_4/" class="">7.4 private本类可访问</a>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/" >
+        作业
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>make入门教程</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#make入门教程-采用-mingw32-makeexe">make入门教程 (采用 mingw32-make.exe)</a></li>
+    <li><a href="#一个简单的例子">一个简单的例子</a></li>
+    <li><a href="#1-makefile">1 Makefile</a></li>
+    <li><a href="#2-makefile">2 Makefile</a></li>
+    <li><a href="#3-makefile-完整的例子">3 makefile 完整的例子</a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="make入门教程-采用-mingw32-makeexe">make入门教程 (采用 mingw32-make.exe)</h2>
+<p>上一节，我们已经学习了如何用g++编译单个<code>.cpp</code>文件。如果有多个 <code>.cpp</code> 文件我们如何来编译我们的程序呢？
+Makefile是一种方便的组织代码编译方式。下面我们来创建自己的makefile，编译并链接多个<code>.cpp</code> ，生成可执行程序。</p>
+<h2 id="一个简单的例子">一个简单的例子</h2>
+<p>首先举一个简单的例子，在项目文件夹中有三个文件: <code>main.c</code> ，<code>func.c</code> ，<code>func.h</code> ，分别代表着主程序，函数实现和对应的头文件。</p>
+<p><code>main.c</code></p>
+<pre><code>// main.c
+#include &lt;stdio.h&gt;
+#include &quot;func.h&quot;
+int main() {
+	sayHello();
+	return 0;
+}
+</code></pre><p><code>func.h</code></p>
+<pre><code>// func.h
+void sayHello();
+</code></pre><p><code>func.c</code></p>
+<pre><code>// func.c
+#include &lt;stdio.h&gt;
+#include &quot;func.h&quot;
+void sayHello() {
+	printf(&quot;Hello makefiles!\n&quot;);
+}
+</code></pre><p>一般情况下，我们将使用以下命令来编译这个项目：</p>
+<pre><code>g++ -o hello.exe main.c func.c -I.	# 注意最后的点代表当前目录
+</code></pre><p>这条命令编译了两个.c文件 <code>main.c</code> <code>func.c</code> , 并将可执行文件命名为 <code>hello.exe</code></p>
+<ul>
+<li><code>-o</code> 定义生成的可执行文件的名字。</li>
+<li><code>-I.</code>代表gcc将在当前目录（.）寻找包含的头文件.</li>
+</ul>
+<p>当只有轻微的改动时适当修改一下这条命令就已经足够了，但当添加更多文件时，这就很麻烦了。</p>
+<p>另外，如果你只改动了其中某一个.c文件，这条命令每次都将重新编译所有文件，对于大项目来说效率很低，所以这才需要makefile.</p>
+<h2 id="1-makefile">1 Makefile</h2>
+<pre><code>hello.exe : main.c func.c
+	g++ -o hello.exe main.c func.c -I.
+</code></pre><p>将这条规则写进一个名为makefile的文件，然后在 vscode 终端中键入 <code>mingw32-make.exe</code> 就可以执行文件中的第一条规则了。其中冒号:后面放置的是规则 <code>hello.exe</code> 所依赖的文件，当这些文件改动时，规则 <code>hello.exe</code> 会被重新执行。这里没有放置头文件，所以即使头文件改变，命令行中键入 <code>mingw32-make.exe</code> ，这条规则也不会被执行。当然，就目前来说，这条规则效率很低。</p>
+<p>需要注意的是，在g++命令前有一个tab制表符，在任何命令前都必须有个tab制表符。</p>
+<blockquote class="book-hint warning">
+  <ul>
+<li>make 这个软件有很多不同的版本，用来支持各种系统。 <code>mingw32-make.exe</code> 是 make 在 win10 下的一个版本。</li>
+<li><code>mingw32-make.exe</code> 和你之前配置的 g++ 在同一位置，之前配置了 g++ 的环境变量，就不用配置 mingw32-make.exe 的环境变量了</li>
+</ul>
+</blockquote>
+
+<h2 id="2-makefile">2 Makefile</h2>
+<pre><code>hello.exe : main.o func.o
+	g++ -o hello.exe main.o func.o
+</code></pre><p>这里我们通过把目标文件 <code>main.o</code> 和 <code>func.o</code> 放置在规则依赖列表中，make将链接目标文件 <code>main.o</code> <code>func.o</code> 生成可执行文件 <code>hello.exe</code> 。</p>
+<p>这样的makefile足够应对小型项目，但是像之前提到的：依赖文件中没有包含头文件，所以头文件改变后make将不会重新编译.c文件。为了修补这个问题，我们需要将头文件加入到依赖列表中。如下所示：</p>
+<pre><code>hello.exe : main.o func.o
+	g++ -o hello.exe main.o func.o
+	
+main.o: main.c func.h
+	g++ -c -o main.o main.c -I.
+	
+func.o: func.c func.h
+	g++ -c -o func.o func.c -I.
+</code></pre><ul>
+<li><code>-c</code> 指出仅生成目标文件 <code>.o</code></li>
+<li><code>-o</code> 指出生成的目标文件的名字。</li>
+</ul>
+<p>make将先编译并生成目标文件 <code>func.o</code> 和 <code>main.o</code> ,之后， 链接这两个文件生成可执行文件 <code>hello.exe</code></p>
+<h2 id="3-makefile-完整的例子">3 makefile 完整的例子</h2>
+<p>工作目录中的文件</p>
+<pre><code>-|
+ |---func.h
+ |---func.c
+ |---main.c
+ |---makefile
+</code></pre><p>makefile</p>
+<pre><code>hello.exe : main.o func.o
+	g++ -o hello.exe main.o func.o
+	
+main.o: main.c func.h
+	g++ -c -o main.o main.c -I.
+	
+func.o: func.c func.h
+	g++ -c -o func.o func.c -I.
+ 
+.PHONY:clean all
+
+#由于win10没有rm命令,可以使用del, 参考百度
+clean:
+	del *.exe /q /s
+	del *.o /q /s
+</code></pre><p><code>main.c</code></p>
+<pre><code>// main.c
+#include &lt;stdio.h&gt;
+#include &quot;func.h&quot;
+int main() {
+	sayHello();
+	return 0;
+}
+</code></pre><p><code>func.h</code></p>
+<pre><code>// func.h
+void sayHello();
+</code></pre><p><code>func.c</code></p>
+<pre><code>// func.c
+#include &lt;stdio.h&gt;
+#include &quot;func.h&quot;
+void sayHello() {
+	printf(&quot;Hello makefiles!\n&quot;);
+}
+</code></pre><p>在 vscode 终端中，执行如下命令编译、运行、清理程序</p>
+<ul>
+<li><code>mingw32-make.exe</code> 编译生成exe</li>
+<li><code>./hello.exe</code> 运行程序</li>
+<li><code>mingw32-make.exe clean</code> 删除可执行程序 <code>exe</code> 和目标文件 <code>.o</code> 。注意到以上的makefile中我们定义了clean规则，所以这里可以执行clean规则。</li>
+</ul>
+<p>执行过程如下图：</p>
+<p><img src="exmake.png" alt="avatar" /></p>
+<blockquote class="book-hint warning">
+  参考：https://blog.csdn.net/qq_35754154/article/details/127432564<br>
+<strong>如果学习完本实例，仍然没有懂make使用方法，建议自己百度make教程学习。</strong>
+</blockquote>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#make入门教程-采用-mingw32-makeexe">make入门教程 (采用 mingw32-make.exe)</a></li>
+    <li><a href="#一个简单的例子">一个简单的例子</a></li>
+    <li><a href="#1-makefile">1 Makefile</a></li>
+    <li><a href="#2-makefile">2 Makefile</a></li>
+    <li><a href="#3-makefile-完整的例子">3 makefile 完整的例子</a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
